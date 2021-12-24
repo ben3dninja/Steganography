@@ -19,7 +19,7 @@ private fun xorArrays(a: ByteArray, b: ByteArray): ByteArray {
     return c
 }
 
-fun matchSize(password: ByteArray, length: Int): ByteArray {
+private fun matchSize(password: ByteArray, length: Int): ByteArray {
     var matched: ByteArray = password
     while (matched.size < length) {
         matched += password

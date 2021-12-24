@@ -33,7 +33,7 @@ fun askForPassword(): String {
     return readSafe()
 }
 
-fun readSafe(): String {
+private fun readSafe(): String {
     var s: String? = null
     while (s == null) {
         s = readLine()

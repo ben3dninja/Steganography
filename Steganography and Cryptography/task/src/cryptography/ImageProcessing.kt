@@ -22,11 +22,11 @@ fun tryToHideMessage(message: ByteArray, image: BufferedImage): BufferedImage? {
     } else hideMessageInImage(message, image)
 }
 
-fun isImageBigEnough(message: ByteArray, image: BufferedImage): Boolean {
+private fun isImageBigEnough(message: ByteArray, image: BufferedImage): Boolean {
     return image.width * image.height >= message.size * 8
 }
 
-fun hideMessageInImage(message: ByteArray, image: BufferedImage): BufferedImage {
+private fun hideMessageInImage(message: ByteArray, image: BufferedImage): BufferedImage {
     var bitCounter = 0
     var byteCounter = 0
     var isProcessingDone = false
@@ -51,7 +51,7 @@ fun hideMessageInImage(message: ByteArray, image: BufferedImage): BufferedImage 
     return output
 }
 
-fun processPixel(color: Color, byteArray: ByteArray, byteCounter: Int, bitCounter: Int): Color {
+private fun processPixel(color: Color, byteArray: ByteArray, byteCounter: Int, bitCounter: Int): Color {
     val r = color.red
     val g = color.green
     var b = color.blue
@@ -60,7 +60,7 @@ fun processPixel(color: Color, byteArray: ByteArray, byteCounter: Int, bitCounte
     return Color(r, g, b)
 }
 
-fun writeImage(image: BufferedImage, fileName: String) {
+private fun writeImage(image: BufferedImage, fileName: String) {
     ImageIO.write(image, "png", File(fileName))
 }
 
@@ -83,7 +83,7 @@ fun tryToReadMessage(image: BufferedImage): ByteArray? {
     }
 }
 
-fun readMessage(image: BufferedImage): ByteArray? {
+private fun readMessage(image: BufferedImage): ByteArray? {
     var message = byteArrayOf()
     var byteCounter = 0
     var bitCounter = 0
@@ -109,16 +109,16 @@ fun readMessage(image: BufferedImage): ByteArray? {
     return null
 }
 
-fun readPixel(color: Color): Int {
+private fun readPixel(color: Color): Int {
     val b = color.blue
     return getBitAt(b.toByte(), 7)
 }
 
-fun getBitAt(byte: Byte, position: Int): Int {
+private fun getBitAt(byte: Byte, position: Int): Int {
     return byte.toInt() shr 7 - position and 0b1
 }
 
-fun setLastBit(i: Int, bit: Int): Int {
+private fun setLastBit(i: Int, bit: Int): Int {
     return if (bit == 0) {
         i and 0b11111110
     } else {
